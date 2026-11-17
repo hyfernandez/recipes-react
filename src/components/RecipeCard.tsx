@@ -1,13 +1,6 @@
 import { Link } from 'react-router'
-import type { Difficulty, Recipe } from '../types/api'
-
-// Record<Difficulty, string> forces one label per difficulty: if the backend adds a value to the
-// Difficulty type, the compiler flags this object until the label is added.
-const DIFFICULTY_LABEL: Record<Difficulty, string> = {
-  easy: 'Easy',
-  medium: 'Medium',
-  hard: 'Hard',
-}
+import type { Recipe } from '../types/api'
+import { DifficultyBadge } from './DifficultyBadge'
 
 interface Props {
   recipe: Recipe
@@ -29,7 +22,7 @@ export function RecipeCard({ recipe }: Props) {
 
         <p className="card-meta">
           <span>{recipe.prepTimeMinutes} min</span>
-          <span className={`badge badge--${recipe.difficulty}`}>{DIFFICULTY_LABEL[recipe.difficulty]}</span>
+          <DifficultyBadge difficulty={recipe.difficulty} />
         </p>
 
         {recipe.tags.length > 0 && (
