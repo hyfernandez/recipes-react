@@ -1,5 +1,6 @@
 import { Link, Route, Routes } from 'react-router'
 import { CatalogPage } from './pages/CatalogPage'
+import { RecipeDetailPage } from './pages/RecipeDetailPage'
 import './App.css'
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
       <main>
         <Routes>
           <Route path="/" element={<CatalogPage />} />
+          <Route path="/recipes/:id" element={<RecipeDetailPage />} />
           <Route
             path="*"
             element={

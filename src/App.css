@@ -162,3 +162,42 @@
   opacity: 0.4;
   cursor: not-allowed;
 }
+
+/* Recipe detail */
+.detail {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 16px;
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.back-link:hover {
+  color: var(--accent);
+}
+
+.detail-image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.detail-image.card-image--empty {
+  display: grid;
+}
+
+.detail h1 {
+  margin: 20px 0 8px;
+}
+
+.detail-description {
+  margin-top: 20px;
+  /* keep the line breaks the author typed in the description */
+  white-space: pre-line;
+}
