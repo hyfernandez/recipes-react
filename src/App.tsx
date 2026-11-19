@@ -1,21 +1,28 @@
 import { Link, Route, Routes } from 'react-router'
+import { ProtectedRoute } from './auth/ProtectedRoute'
+import { SiteHeader } from './components/SiteHeader'
+import { AdminPage } from './pages/AdminPage'
 import { CatalogPage } from './pages/CatalogPage'
+import { LoginPage } from './pages/LoginPage'
 import { RecipeDetailPage } from './pages/RecipeDetailPage'
 import './App.css'
 
 function App() {
   return (
     <>
-      <header className="site-header">
-        <Link to="/" className="brand">
-          Recipes
-        </Link>
-      </header>
+      <SiteHeader />
 
       <main>
         <Routes>
           <Route path="/" element={<CatalogPage />} />
           <Route path="/recipes/:id" element={<RecipeDetailPage />} />
+          <Route path="/login" element={<LoginPage />} />
+
+          {/* Everything nested here requires an admin session (see ProtectedRoute). */}
+          <Route element={<ProtectedRoute />}>
+            <Route path="/admin" element={<AdminPage />} />
+          </Route>
+
           <Route
             path="*"
             element={
