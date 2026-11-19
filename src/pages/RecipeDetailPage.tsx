@@ -2,18 +2,12 @@ import { Link, useParams } from 'react-router'
 import { ApiError } from '../api/client'
 import { DifficultyBadge } from '../components/DifficultyBadge'
 import { useRecipe } from '../hooks/useRecipe'
-
-// A URL segment is always text, and a user can type anything (/recipes/abc, /recipes/-1, /recipes/1.5).
-function parseId(value: string | undefined): number | undefined {
-  const number = Number(value)
-
-  return Number.isInteger(number) && number > 0 ? number : undefined
-}
+import { parsePositiveInt } from '../utils/parsePositiveInt'
 
 export function RecipeDetailPage() {
   // useParams returns what the route pattern captured: path="/recipes/:id" -> { id: '12' }.
   const { id } = useParams()
-  const recipeId = parseId(id)
+  const recipeId = parsePositiveInt(id)
 
   // Hooks cannot be called conditionally, so the validation lives here and the hook is used in a
   // child component that is only rendered when the id is valid.

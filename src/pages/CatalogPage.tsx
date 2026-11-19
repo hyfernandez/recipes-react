@@ -5,17 +5,7 @@ import { RecipeCard } from '../components/RecipeCard'
 import { TagFilter } from '../components/TagFilter'
 import { useRecipes } from '../hooks/useRecipes'
 import { useTags } from '../hooks/useTags'
-
-// Query-string values are text a user can edit by hand (?page=abc, ?page=-3): only a positive
-// integer is accepted, anything else counts as "not given".
-function parsePositiveInt(value: string | null): number | undefined {
-  if (value === null) {
-    return undefined
-  }
-  const number = Number(value)
-
-  return Number.isInteger(number) && number > 0 ? number : undefined
-}
+import { parsePositiveInt } from '../utils/parsePositiveInt'
 
 export function CatalogPage() {
   // The page and the tag live in the URL (/?page=2&tag=3), not in component state, so the

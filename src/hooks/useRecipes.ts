@@ -15,9 +15,11 @@ export interface RecipesState {
   loading: boolean
 }
 
-export function useRecipes(page: number, tagId: number | undefined): RecipesState {
-  // Identifies the request that the current page/tag asks for.
-  const key = `${page}:${tagId ?? ''}`
+// `version` lets a caller force a reload of the same page (e.g. after deleting a recipe): changing it
+// changes the key, so the list is requested again.
+export function useRecipes(page: number, tagId: number | undefined, version = 0): RecipesState {
+  // Identifies the request that the current page/tag/version asks for.
+  const key = `${page}:${tagId ?? ''}:${version}`
   const [result, setResult] = useState<Result | null>(null)
 
   useEffect(() => {
