@@ -281,3 +281,35 @@
   /* keep the line breaks the author typed in the description */
   white-space: pre-line;
 }
+
+.pagination-pages {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pagination-pages button {
+  min-width: 36px;
+  padding: 6px 10px;
+}
+
+.pagination-pages button[aria-current='page'] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-text);
+  opacity: 1;
+}
+
+.pagination-pages li[aria-hidden='true'] {
+  color: var(--muted);
+}
+
+@media (max-width: 520px) {
+  .pagination {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+}

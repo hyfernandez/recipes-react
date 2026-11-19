@@ -1,3 +1,5 @@
+import { pageItems } from '../utils/pageItems'
+
 interface Props {
   page: number
   pages: number
@@ -14,9 +16,30 @@ export function Pagination({ page, pages, onChange }: Props) {
       <button type="button" disabled={page <= 1} onClick={() => onChange(page - 1)}>
         Previous
       </button>
-      <span>
-        Page {page} of {pages}
-      </span>
+
+      <ol className="pagination-pages">
+        {pageItems(page, pages).map((item, index) =>
+          item === 'gap' ? (
+            // The position is the only identity a gap has; the list never reorders, so an index key is safe.
+            <li key={`gap-${index}`} aria-hidden="true">
+              …
+            </li>
+          ) : (
+            <li key={item}>
+              <button
+                type="button"
+                aria-label={`Page ${item}`}
+                aria-current={item === page ? 'page' : undefined}
+                disabled={item === page}
+                onClick={() => onChange(item)}
+              >
+                {item}
+              </button>
+            </li>
+          ),
+        )}
+      </ol>
+
       <button type="button" disabled={page >= pages} onClick={() => onChange(page + 1)}>
         Next
       </button>
